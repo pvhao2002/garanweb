@@ -16,7 +16,6 @@ public class Dbcontext {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("success fully");
 		return cnt;
 	}
 }

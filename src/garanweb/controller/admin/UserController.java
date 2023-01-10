@@ -31,17 +31,19 @@ public class UserController extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
 			String url = request.getRequestURL().toString();
-			if(url.contains("edit")) {
+			if (url.contains("edit")) {
 				load(request, response);
-			}else if(url.contains("delete")) {
+			} else if (url.contains("delete")) {
 				delete(request, response);
-			}else {
+			} else {
 				list(request, response);
 			}
 		} catch (Exception e) {
@@ -59,6 +61,7 @@ public class UserController extends HttpServlet {
 	public void edit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("fullName");
+		name = new String(name.getBytes("ISO8859_1"), "UTF-8");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phoneNumber");
 		String password = request.getParameter("password");
@@ -71,6 +74,7 @@ public class UserController extends HttpServlet {
 	public void load(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("id");
 		Account item = dao.getItem(id);
+		System.out.println(item.toString());
 		request.setAttribute("item", item);
 		request.getRequestDispatcher("view/admin/edit/edit-user.jsp").forward(request, response);
 	}
@@ -88,7 +92,30 @@ public class UserController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		try {
+			String cmd = request.getParameter("command");
+			if (cmd == null) {
+				cmd = "LIST";
+			}
+			switch (cmd) {
+			case "LIST":
+				list(request, response);
+				break;
+			case "EDIT":
+				edit(request, response);
+				break;
+			case "LOAD":
+				load(request, response);
+				break;
+			case "DELETE":
+				delete(request, response);
+				break;
+
+			default:
+				list(request, response);
+			}
+		} catch (Exception e) {
+		}
 	}
 
 }

@@ -15,7 +15,7 @@ import garanweb.entity.Account;
 /**
  * Servlet implementation class Logincontroller
  */
-@WebServlet("/Logincontroller")
+@WebServlet("/login")
 public class Logincontroller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserDao dao;
@@ -57,29 +57,28 @@ public class Logincontroller extends HttpServlet {
 			HttpSession session = request.getSession();
 			String user_session = (String) session.getAttribute("user_session");
 			if (user_session != null) {
-				request.getSession(false).invalidate();
+				session.removeAttribute("user_session");
 			}
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			if (dao.validate(email, password)) {
-				Account tmp = dao.getItem(email);
+				Account tmp = dao.getItem1(email);
 				session.setAttribute("user_session", tmp);
 
 				if (tmp.getAdmin() == 0) {
-					response.sendRedirect(request.getContextPath() + "/admin");
+					response.sendRedirect(request.getContextPath() + "/admin-trang-chu");
 				} else {
 					response.sendRedirect(request.getContextPath() + "/trang-chu");
 				}
 
 			} else {
 				request.setAttribute("notify", false);
-				request.getRequestDispatcher("view/web/loginfail.jsp").forward(request, response);
+				request.getRequestDispatcher("view/web/login.jsp").forward(request, response);
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			request.setAttribute("notify", false);
-			request.getRequestDispatcher("view/web/loginfail.jsp").forward(request, response);
+			request.getRequestDispatcher("view/web/login.jsp").forward(request, response);
 		}
 	}
 

@@ -63,5 +63,8 @@ public class OrderItem {
 		this.orderId = orderId;
 		this.productId = productId;
 	}
+	public OrderItem() {
+		// TODO Auto-generated constructor stub
+	}
 
 }

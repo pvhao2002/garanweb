@@ -1,4 +1,7 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 
@@ -13,9 +16,7 @@
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/view/web/images/favicon.png"
-	type="">
+<link rel="shortcut icon" href="images/favicon.png" type="">
 
 <title>ABC Chicken</title>
 
@@ -31,17 +32,12 @@
 	integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ=="
 	crossorigin="anonymous" />
 <!-- font awesome style -->
-<link
-	href="${pageContext.request.contextPath}/view/web/css/font-awesome.min.css"
-	rel="stylesheet" />
+<link href="css/font-awesome.min.css" rel="stylesheet" />
 
 <!-- Custom styles for this template -->
-<link href="${pageContext.request.contextPath}/view/web/css/style.css"
-	rel="stylesheet" />
+<link href="css/style.css" rel="stylesheet" />
 <!-- responsive style -->
-<link
-	href="${pageContext.request.contextPath}/view/web/css/responsive.css"
-	rel="stylesheet" />
+<link href="css/responsive.css" rel="stylesheet" />
 
 </head>
 
@@ -49,15 +45,13 @@
 
 	<div class="hero_area">
 		<div class="bg-box">
-			<img
-				src="${pageContext.request.contextPath}/view/web/images/hero-bg.jpg"
-				alt="">
+			<img src="images/hero-bg.jpg" alt="">
 		</div>
 		<!-- header section strats -->
 		<header class="header_section">
 			<div class="container">
 				<nav class="navbar navbar-expand-lg custom_nav-container ">
-					<a class="navbar-brand" href="index.jsp"> <span> ABC
+					<a class="navbar-brand" href="index.html"> <span> ABC
 							Chicken </span>
 					</a>
 
@@ -71,14 +65,14 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav  mx-auto ">
 							<li class="nav-item active"><a class="nav-link"
-								href="index.jsp">Trang chá»§ <span class="sr-only">(current)</span></a>
+								href="index.html">Trang chủ <span class="sr-only">(current)</span></a>
 							</li>
 							<li class="nav-item"><a class="nav-link"
-								href="shop-grid.jsp">Thá»±c ÄÆ¡n</a></li>
-							<li class="nav-item"><a class="nav-link" href="about.jsp">About
+								href="shop-grid.html">Thực đơn</a></li>
+							<li class="nav-item"><a class="nav-link" href="about.html">About
 									us</a></li>
-							<li class="nav-item"><a class="nav-link" href="book.jsp">Äáº·t
-									bÃ n</a></li>
+							<li class="nav-item"><a class="nav-link" href="book.html">Đặt
+									bàn</a></li>
 						</ul>
 						<div class="user_option">
 							<a href="" class="user_link"> <i class="fa fa-user"
@@ -162,7 +156,7 @@
 	<section class="book_section layout_padding">
 		<div class="container">
 			<div class="heading_container">
-				<h2>Äáº·t bÃ n</h2>
+				<h2>Đặt bàn</h2>
 			</div>
 			<div class="row">
 				<div class="col-md-6">
@@ -170,19 +164,19 @@
 						<form action="">
 							<div>
 								<input type="text" class="form-control"
-									placeholder="TÃªn cá»§a báº¡n" />
+									placeholder="Tên của bạn" />
 							</div>
 							<div>
 								<input type="text" class="form-control"
-									placeholder="Sá» Äiá»n thoáº¡i" />
+									placeholder="Số điện thoại" />
 							</div>
 							<div>
 								<input type="email" class="form-control" placeholder="Email" />
 							</div>
 							<div>
 								<select class="form-control nice-select wide">
-									<option value="" disabled selected>Äáº·t bÃ n bao
-										nhiÃªu ngÆ°á»i?</option>
+									<option value="" disabled selected>Đặt bàn bao nhiêu
+										người?</option>
 									<option value="">2</option>
 									<option value="">3</option>
 									<option value="">4</option>
@@ -193,7 +187,7 @@
 								<input type="date" class="form-control">
 							</div>
 							<div class="btn_box">
-								<button>Äáº·t ngay</button>
+								<button>Đặt ngay</button>
 							</div>
 						</form>
 					</div>
@@ -214,10 +208,10 @@
 			<div class="row">
 				<div class="col-md-4 footer-col">
 					<div class="footer_contact">
-						<h4>LiÃªn há»</h4>
+						<h4>Liên hệ</h4>
 						<div class="contact_link_box">
 							<a href=""> <i class="fa fa-map-marker" aria-hidden="true"></i>
-								<span> Vá» trÃ­ </span>
+								<span> Vị trí </span>
 							</a> <a href=""> <i class="fa fa-phone" aria-hidden="true"></i> <span>
 									+84 123456789 </span>
 							</a> <a href=""> <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -229,7 +223,7 @@
 				<div class="col-md-4 footer-col">
 					<div class="footer_detail">
 						<a href="" class="footer-logo"> ABC Chicken </a>
-						<p>Cá»­a hÃ ng gÃ rÃ¡n sá» 1 Viá»t Nam</p>
+						<p>Cửa hàng gà rán số 1 Việt Nam</p>
 						<div class="footer_social">
 							<a href=""> <i class="fa fa-facebook" aria-hidden="true"></i>
 							</a> <a href=""> <i class="fa fa-twitter" aria-hidden="true"></i>
@@ -241,9 +235,9 @@
 					</div>
 				</div>
 				<div class="col-md-4 footer-col">
-					<h4>Thá»i gian hoáº¡t Äá»ng</h4>
-					<p>Má»i ngÃ y</p>
-					<p>10:00 sÃ¡ng -10:00 tá»i</p>
+					<h4>Thời gian hoạt động</h4>
+					<p>Mỗi ngày</p>
+					<p>10:00 sáng -10:00 tối</p>
 				</div>
 			</div>
 			<div class="footer-info">

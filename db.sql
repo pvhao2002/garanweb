@@ -22,7 +22,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
@@ -40,12 +40,12 @@ CREATE TABLE `account`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `totalPrice` float NULL DEFAULT NULL,
+  `totalPrice` DOUBLE NULL DEFAULT NULL,
   `status` int NULL DEFAULT NULL,
-  `user_id` int NULL DEFAULT NULL,
+  `user_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_orderuser`(`user_id` ASC) USING BTREE,
   CONSTRAINT `fk_orderuser` FOREIGN KEY (`user_id`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -60,11 +60,11 @@ CREATE TABLE `orders`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `orederitem`;
 CREATE TABLE `orederitem`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `quantity` int NULL DEFAULT NULL,
-  `price` float NULL DEFAULT NULL,
-  `orderId` int NULL DEFAULT NULL,
-  `productId` int NULL DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `quantity` int(11) NULL DEFAULT NULL,
+  `price` DOUBLE NULL DEFAULT NULL,
+  `orderId` int(11) NULL DEFAULT NULL,
+  `productId` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_oderOrderDetail`(`orderId` ASC) USING BTREE,
   INDEX `fk_productOrderItem`(`productId` ASC) USING BTREE,
@@ -81,10 +81,10 @@ CREATE TABLE `orederitem`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `price` float NULL DEFAULT NULL,
+  `price` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
