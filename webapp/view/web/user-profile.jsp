@@ -1,4 +1,7 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +14,7 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/view/web/css/user-profile.css">
+<link rel="stylesheet" href="css/user-profile.css">
 
 </head>
 <body>
@@ -24,13 +26,13 @@
 					<div class="profile-img">
 						<img src="img/avatar/avatar1.jpg" alt="" />
 						<div class="file btn btn-lg btn-primary">
-							Äá»i hÃ¬nh Äáº¡i diá»n <input type="file" name="file" />
+							Đổi hình đại diện <input type="file" name="file" />
 						</div>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="profile-head">
-						<h5>KhÃ¡nh</h5>
+						<h5>Khánh</h5>
 						<h6>VIP</h6>
 						<p class="proile-rating">
 							RANKINGS : <span>8/10</span>
@@ -47,12 +49,12 @@
 				</div>
 				<div class="col-md-2">
 					<input type="submit" class="profile-edit-btn" name="btnAddMore"
-						value="Quay láº¡i" />
+						value="Quay lại" />
 
 				</div>
 				<div class="col-md-2">
 					<input type="submit" id="change-profile" class="profile-edit-btn"
-						name="btnAddMore" value="Thay Äá»i" />
+						name="btnAddMore" value="Thay đổi" />
 
 				</div>
 
@@ -84,10 +86,10 @@
 							</div>
 							<div class="row">
 								<div class="col-md-6">
-									<label>TÃªn</label>
+									<label>Tên</label>
 								</div>
 								<div class="col-md-6">
-									<p>KhÃ¡nh</p>
+									<p>Khánh</p>
 								</div>
 							</div>
 							<div class="row">
@@ -100,7 +102,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-6">
-									<label>Sá» Äiá»n thoáº¡i</label>
+									<label>Số điện thoại</label>
 								</div>
 								<div class="col-md-6">
 									<p>0778061965</p>
@@ -108,7 +110,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-6">
-									<label>Tráº¡ng thÃ¡i</label>
+									<label>Trạng thái</label>
 								</div>
 								<div class="col-md-6">
 									<p>VIP</p>

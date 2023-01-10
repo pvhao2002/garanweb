@@ -13,11 +13,12 @@ import garanweb.entity.Account;
 
 public class UserDao {
 	static final String LOGIN = "SELECT * FROM account " + "WHERE email = ? AND password = ?";
-	static final String INSERT = "INSERT INTO account(name,password,email,phone,admin) VALUES(?,?,?,?,?)";
-	static final String CHECKDUPEMAIL = "SELECT name,email,password FROM account WHERE email=?";
+	static final String INSERT = "INSERT INTO account(name, password, email, phone, admin) VALUES(?,?,?,?,?)";
+	static final String CHECKDUPEMAIL = "SELECT * FROM account WHERE email=?";
 	static final String GET_USER = "SELECT * FROM account";
-	static final String LOAD_USER = "SELECT * FROM account where email = ?";
-	static final String UPDATE_USER = "UPDATE account SET first_name=?, last_name=?,username=?,password=?, email=?,phonenumber=? WHERE id=?";
+	static final String LOAD_USER = "SELECT * FROM account where id = ?";
+	static final String LOAD_USER1 = "SELECT * FROM account where email = ?";
+	static final String UPDATE_USER = "UPDATE account SET name = ?, phone = ?, email = ?, password=? WHERE id = ?";
 
 	public boolean validate(String email, String password) {
 		boolean success = false;
@@ -26,7 +27,6 @@ public class UserDao {
 			PreparedStatement psmt = cnt.prepareStatement(LOGIN);
 			psmt.setString(1, email);
 			psmt.setString(2, password);
-			System.out.println(psmt);
 			ResultSet rs = psmt.executeQuery();
 			if (rs.next()) {
 				success = true;
@@ -134,8 +134,8 @@ public class UserDao {
 					String password = rs.getString("password");
 					String email = rs.getString("email");
 					String phone = rs.getString("phone");
-
-					user.add(new Account(id, name, password, email, phone));
+					int admin = rs.getInt("admin");
+					user.add(new Account(id, name, password, email, phone, admin));
 				}
 			}
 		} catch (Exception e) {
@@ -153,6 +153,7 @@ public class UserDao {
 		}
 		return user;
 	}
+	
 
 	public Account getItem(String theStudentId) throws Exception {
 
@@ -179,13 +180,63 @@ public class UserDao {
 
 			// retrieve data from result set row
 			if (myRs.next()) {
+				int ID = myRs.getInt("id");
 				String name = myRs.getString("name");
 				String passWord = myRs.getString("password");
 				String email = myRs.getString("email");
 				String phone = myRs.getString("phone");
 				int role = myRs.getInt("admin");
 				// use the studentId during construction
-				user = new Account(name, passWord, email, phone, role);
+				user = new Account(ID, name, passWord, email, phone, role);
+			} else {
+			}
+
+			return user;
+		} finally {
+			if (myRs != null) {
+				myRs.close();
+			}
+			if (myStmt != null) {
+				myStmt.close();
+			}
+			if (myConn != null) {
+				myConn.close();
+			}
+		}
+	}
+
+	public Account getItem1(String email) throws Exception {
+
+		Account user = null;
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+			// get connection to database
+			myConn = Dbcontext.getConnection();
+
+			// create sql to get selected student
+			String sql = LOAD_USER1;
+
+			// create prepared statement
+			myStmt = myConn.prepareStatement(sql);
+
+			// set params
+			myStmt.setString(1, email);
+
+			// execute statement
+			myRs = myStmt.executeQuery();
+
+			// retrieve data from result set row
+			if (myRs.next()) {
+				int ID = myRs.getInt("id");
+				String name = myRs.getString("name");
+				String passWord = myRs.getString("password");
+				String phone = myRs.getString("phone");
+				int role = myRs.getInt("admin");
+				// use the studentId during construction
+				user = new Account(ID, name, passWord, email, phone, role);
 			} else {
 			}
 
@@ -220,9 +271,10 @@ public class UserDao {
 
 			// set params
 			myStmt.setString(1, user.getName());
-			myStmt.setString(2, user.getPassword());
+			myStmt.setString(2, user.getPhone());
 			myStmt.setString(3, user.getEmail());
-			myStmt.setInt(4, user.getId());
+			myStmt.setString(4, user.getPassword());
+			myStmt.setInt(5, user.getId());
 
 			// execute SQL statement
 			myStmt.execute();
@@ -281,4 +333,5 @@ public class UserDao {
 			exc.printStackTrace();
 		}
 	}
+
 }

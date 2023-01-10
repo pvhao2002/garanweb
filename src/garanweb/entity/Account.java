@@ -90,6 +90,12 @@ public class Account {
 		this.phone = phone;
 	}
 
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", name=" + name + ", phone=" + phone + ", email=" + email + ", password="
+				+ password + ", admin=" + admin + "]";
+	}
+
 	private int id;
 
 	private String name;
@@ -97,5 +103,5 @@ public class Account {
 	private String email;
 	private String password;
 	private int admin;
-
+	
 }

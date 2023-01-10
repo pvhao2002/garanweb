@@ -1,4 +1,7 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -8,7 +11,7 @@
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Thá»±c ÄÆ¡n</title>
+<title>Thực đơn</title>
 <!-- bootstrap core css -->
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/view/web/css/bootstrap.css" />
@@ -66,15 +69,13 @@
 </head>
 
 <body>
-
-
-
 	<!-- header section strats -->
 	<header class="header_section">
 		<div class="container">
 			<nav class="navbar navbar-expand-lg custom_nav-container ">
-				<a class="navbar-brand" href="index.jsp"> <span> ABC
-						Chicken </span>
+				<a class="navbar-brand"
+					href="${pageContext.request.contextPath}/trang-chu"> <span>
+						ABC Chicken </span>
 				</a>
 
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -86,20 +87,35 @@
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav  mx-auto ">
-						<li class="nav-item active"><a class="nav-link"
-							href="index.jsp">Trang chá»§ <span class="sr-only">(current)</span></a>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="shop-grid.jsp">Thá»±c
-								ÄÆ¡n</a></li>
-						<li class="nav-item"><a class="nav-link" href="about.jsp">About
-								us</a></li>
-						<li class="nav-item"><a class="nav-link" href="book.jsp">Äáº·t
-								bÃ n</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="${pageContext.request.contextPath}/trang-chu">Trang chủ
+								<span class="sr-only">(current)</span>
+						</a></li>
+						<li class="nav-item  active"><a class="nav-link"
+							href="${pageContext.request.contextPath}/thuc-don">Thực đơn</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="${pageContext.request.contextPath}/about">About us</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="${pageContext.request.contextPath}/order">Đặt bàn</a></li>
+						<c:if test="${sessionScope.user_session == null}">
+							<li class="nav-item"><a class="nav-link"
+								style="line-height: 58px;"
+								href="${pageContext.request.contextPath}/login">Login</a></li>
+						</c:if>
+
+						<c:if test="${sessionScope.user_session != null}">
+							<li class="nav-item"><a class="nav-link" href=""
+								style="color: blue;">${sessionScope.user_session.name}</a></li>
+							<li class="nav-item"><a class="nav-link"
+								style="color: graytext;"
+								href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
+						</c:if>
 					</ul>
 					<div class="user_option">
 						<a href="" class="user_link"> <i class="fa fa-user"
 							aria-hidden="true"></i>
-						</a> <a class="cart_link" href="shopping-cart.jsp"> <svg
+						</a> <a class="cart_link"
+							href="${pageContext.request.contextPath}/cart"> <svg
 								version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
 								xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 								viewBox="0 0 456.029 456.029"
@@ -165,7 +181,8 @@
 								<i class="fa fa-search" aria-hidden="true"></i>
 							</button>
 						</form>
-						<a href="" class="order_online"> Order Online </a>
+						<a href="${pageContext.request.contextPath}/thuc-don"
+							class="order_online"> Order Online </a>
 					</div>
 				</div>
 			</nav>
@@ -183,7 +200,7 @@
 					<div class="sidebar">
 						<div class="sidebar__item"></div>
 						<div class="sidebar__item">
-							<h4>Má»©c giÃ¡</h4>
+							<h4>Mức giá</h4>
 							<div class="price-range-wrap">
 								<div
 									class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
@@ -205,17 +222,17 @@
 
 						<div class="sidebar__item">
 							<div class="sidebar__item__size">
-								<label for="large"> 1 ngÆ°á»i <input type="radio"
+								<label for="large"> 1 người <input type="radio"
 									id="large">
 								</label>
 							</div>
 							<div class="sidebar__item__size">
-								<label for="medium"> 2 ngÆ°á»i <input type="radio"
+								<label for="medium"> 2 người <input type="radio"
 									id="medium">
 								</label>
 							</div>
 							<div class="sidebar__item__size">
-								<label for="small"> 2-4 ngÆ°á»i <input type="radio"
+								<label for="small"> 2-4 người <input type="radio"
 									id="small">
 								</label>
 							</div>
@@ -228,175 +245,21 @@
 					</div>
 				</div>
 				<div class="col-lg-9 col-md-7">
-					<div class="product__discount">
-						<div class="section-title product__discount__title">
-							<h2>Giáº£m giÃ¡</h2>
-						</div>
-						<div class="row">
-							<div class="product__discount__slider owl-carousel">
-								<div class="col-lg-4">
-									<div class="product__discount__item">
-										<div class="product__discount__item__pic set-bg"
-											data-setbg="img/product/2-miáº¿ng-gÃ -giÃ²n.jpg">
-											<div class="product__discount__percent">-20%</div>
-											<ul class="product__item__pic__hover">
-												<li><a href="shop-details.jsp"><i
-														class="fa fa-heart"></i></a></li>
-												<li><a href="shop-details.jsp"><i
-														class="fa fa-retweet"></i></a></li>
-												<li><a href="shop-details.jsp"><i
-														class="fa fa-shopping-cart"></i></a></li>
-											</ul>
-										</div>
-										<div class="product__discount__item__text">
 
-											<h5>
-												<a href="#">2 miáº¿ng gÃ giÃ²n</a>
-											</h5>
-											<div class="product__item__price">
-												48.000<span>60.000</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4">
-									<div class="product__discount__item">
-										<div class="product__discount__item__pic set-bg"
-											data-setbg="img/product/2-miáº¿ng-gÃ -sá»t-cay.jpg">
-											<div class="product__discount__percent">-20%</div>
-											<ul class="product__item__pic__hover">
-												<li><a href="shop-details.jsp"><i
-														class="fa fa-heart"></i></a></li>
-												<li><a href="shop-details.jsp"><i
-														class="fa fa-retweet"></i></a></li>
-												<li><a href="shop-details.jsp"><i
-														class="fa fa-shopping-cart"></i></a></li>
-											</ul>
-										</div>
-										<div class="product__discount__item__text">
-											<h5>
-												<a href="#">2 miáº¿ng gÃ sá»t cay</a>
-											</h5>
-											<div class="product__item__price">
-												52.000<span>65.000</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4">
-									<div class="product__discount__item">
-										<div class="product__discount__item__pic set-bg"
-											data-setbg="img/product/2-miáº¿ng-gÃ -sá»t-cay+khoai-tÃ¢y+nuá»c-ngá»t.jpg">
-											<div class="product__discount__percent">-20%</div>
-											<ul class="product__item__pic__hover">
-												<li><a href="shop-details.jsp"><i
-														class="fa fa-heart"></i></a></li>
-												<li><a href="shop-details.jsp"><i
-														class="fa fa-retweet"></i></a></li>
-												<li><a href="shop-details.jsp"><i
-														class="fa fa-shopping-cart"></i></a></li>
-											</ul>
-										</div>
-										<div class="product__discount__item__text">
-											<h5>
-												<a href="#">2 miáº¿ng gÃ sá»t cay + khoai tÃ¢y +
-													nÆ°á»c ngá»t</a>
-											</h5>
-											<div class="product__item__price">
-												72.000<span>90.000</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4">
-									<div class="product__discount__item">
-										<div class="product__discount__item__pic set-bg"
-											data-setbg="img/product/4-miáº¿ng-gÃ -giÃ²n.jpg">
-											<div class="product__discount__percent">-20%</div>
-											<ul class="product__item__pic__hover">
-												<li><a href="shop-details.jsp"><i
-														class="fa fa-heart"></i></a></li>
-												<li><a href="shop-details.jsp"><i
-														class="fa fa-retweet"></i></a></li>
-												<li><a href="shop-details.jsp"><i
-														class="fa fa-shopping-cart"></i></a></li>
-											</ul>
-										</div>
-										<div class="product__discount__item__text">
-											<h5>
-												<a href="#">4 miáº¿ng gÃ giÃ²n</a>
-											</h5>
-											<div class="product__item__price">
-												93.000 <span>116.000</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4">
-									<div class="product__discount__item">
-										<div class="product__discount__item__pic set-bg"
-											data-setbg="img/product/6-miáº¿ng-gÃ -giÃ²n.jpg">
-											<div class="product__discount__percent">-20%</div>
-											<ul class="product__item__pic__hover">
-												<li><a href="shop-details.jsp"><i
-														class="fa fa-heart"></i></a></li>
-												<li><a href="shop-details.jsp"><i
-														class="fa fa-retweet"></i></a></li>
-												<li><a href="shop-details.jsp"><i
-														class="fa fa-shopping-cart"></i></a></li>
-											</ul>
-										</div>
-										<div class="product__discount__item__text">
-											<h5>
-												<a href="#">6 miáº¿ng gÃ giÃ²n</a>
-											</h5>
-											<div class="product__item__price">
-												140.000 <span>174.000</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4">
-									<div class="product__discount__item">
-										<div class="product__discount__item__pic set-bg"
-											data-setbg="img/product/7up-lá»n-450ml.jpg">
-											<div class="product__discount__percent">-20%</div>
-											<ul class="product__item__pic__hover">
-												<li><a href="shop-details.jsp"><i
-														class="fa fa-heart"></i></a></li>
-												<li><a href="shop-details.jsp"><i
-														class="fa fa-retweet"></i></a></li>
-												<li><a href="shop-details.jsp"><i
-														class="fa fa-shopping-cart"></i></a></li>
-											</ul>
-										</div>
-										<div class="product__discount__item__text">
-											<h5>
-												<a href="#">7up lá»n (450ml)</a>
-											</h5>
-											<div class="product__item__price">
-												12.000 <span>15.000</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 					<div class="filter__item">
 						<div class="row">
 							<div class="col-lg-4 col-md-5">
 								<div class="filter__sort">
-									<span>Sáº¯p xáº¿p</span> <select>
-										<option value="0">Má»i nháº¥t</option>
-										<option value="0">BÃ¡n cháº¡y nháº¥t</option>
+									<span>Sắp xếp</span> <select>
+										<option value="0">Mới nhất</option>
+										<option value="0">Bán chạy nhất</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-lg-4 col-md-4">
 								<div class="filter__found">
 									<h6>
-										<span>16</span> sáº£n pháº©m hiá»n cÃ³
+										<span>${totalProduct}</span> sản phẩm hiện có
 									</h6>
 								</div>
 							</div>
@@ -408,247 +271,25 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/GÃ -viÃªn-giÃ²n.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="shop-details.jsp"><i class="fa fa-heart"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-retweet"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-shopping-cart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">GÃ viÃªn giÃ²n</a>
-									</h6>
-									<h5>30.000</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/ÄÃ¹i-gÃ -xá»t-bonchon-size-S-2-miáº¿ng.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="shop-details.jsp"><i class="fa fa-heart"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-retweet"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-shopping-cart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">ÄÃ¹i gÃ xá»t bonchon size S (2 miáº¿ng)</a>
-									</h6>
-									<h5>99.000</h5>
+						<c:forEach var="item" items="${list }">
+							<div class="col-lg-4 col-md-6 col-sm-6">
+								<div class="product__item">
+									<div class="product__item__pic set-bg"
+										data-setbg="${item.image }"></div>
+									<div class="product__item__text">
+										<h6>
+											<a href="">${item.name}</a>
+										</h6>
+										<h5>
+											<c:set var="p" value="${item.price}" />
+											<fmt:setLocale value="vi_VN" />
+											<fmt:formatNumber value="${p}" type="currency"
+												maxFractionDigits="0" />
+										</h5>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/ÄÃ¹i-gÃ -xá»t-bonchon-size-M-4-miáº¿ng.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="shop-details.jsp"><i class="fa fa-heart"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-retweet"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-shopping-cart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">ÄÃ¹i gÃ xá»t bonchon size M (4 miáº¿ng)</a>
-									</h6>
-									<h5>179.000</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/ÄÃ¹i-gÃ -xá»t-bonchon-size-L-8-miáº¿ng.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="shop-details.jsp"><i class="fa fa-heart"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-retweet"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-shopping-cart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">ÄÃ¹i gÃ xá»t bonchon size L (8 miáº¿ng)</a>
-									</h6>
-									<h5>339.000</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/Khoai-tÃ¢y-chiÃªn_vá»«a.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="shop-details.jsp"><i class="fa fa-heart"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-retweet"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-shopping-cart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">Khoai tÃ¢y chiÃªn (vá»«a)</a>
-									</h6>
-									<h5>20.000</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/Khoai-tÃ¢y-chiÃªn_lá»n.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="shop-details.jsp"><i class="fa fa-heart"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-retweet"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-shopping-cart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">Khoai tÃ¢y chiÃªn (lá»n)</a>
-									</h6>
-									<h5>25.000</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/2-miáº¿ng-gÃ -giÃ²n+khoai-tÃ¢y+pepsi.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="shop-details.jsp"><i class="fa fa-heart"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-retweet"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-shopping-cart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">2 miáº¿ng gÃ giÃ²n + khoai tÃ¢y + nÆ°á»c
-											ngá»t</a>
-									</h6>
-									<h5>80.000</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/GÃ -viÃªn-bonchon.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="shop-details.jsp"><i class="fa fa-heart"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-retweet"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-shopping-cart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">GÃ viÃªn bonchon</a>
-									</h6>
-									<h5>79.000</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/CÆ¡m-tráº¯ng.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="shop-details.jsp"><i class="fa fa-heart"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-retweet"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-shopping-cart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">CÆ¡m tráº¯ng</a>
-									</h6>
-									<h5>5.000</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/CÆ¡m-gÃ -giÃ²n+pepsi.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="shop-details.jsp"><i class="fa fa-heart"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-retweet"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-shopping-cart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">CÆ¡m gÃ giÃ²n + nÆ°á»c ngá»t</a>
-									</h6>
-									<h5>45.000</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/3-miáº¿ng-gÃ -giÃ²n-khÃ´ng-xÆ°Æ¡ng.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="shop-details.jsp"><i class="fa fa-heart"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-retweet"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-shopping-cart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">3 miáº¿ng gÃ giÃ²n khÃ´ng xÆ°Æ¡ng</a>
-									</h6>
-									<h5>30.000</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/NÆ°á»c-suá»i-Aquafina.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="shop-details.jsp"><i class="fa fa-heart"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-retweet"></i></a></li>
-										<li><a href="shop-details.jsp"><i
-												class="fa fa-shopping-cart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">NÆ°á»c suá»i Aquafina</a>
-									</h6>
-									<h5>8.000</h5>
-								</div>
-							</div>
-						</div>
+						</c:forEach>
 					</div>
 					<div class="product__pagination">
 						<a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#"><i
@@ -665,10 +306,10 @@
 			<div class="row">
 				<div class="col-md-4 footer-col">
 					<div class="footer_contact">
-						<h4>LiÃªn há»</h4>
+						<h4>Liên hệ</h4>
 						<div class="contact_link_box">
 							<a href=""> <i class="fa fa-map-marker" aria-hidden="true"></i>
-								<span> Vá» trÃ­ </span>
+								<span> Vị trí </span>
 							</a> <a href=""> <i class="fa fa-phone" aria-hidden="true"></i> <span>
 									+84 123456789 </span>
 							</a> <a href=""> <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -680,7 +321,7 @@
 				<div class="col-md-4 footer-col">
 					<div class="footer_detail">
 						<a href="" class="footer-logo"> ABC Chicken </a>
-						<p>Cá»­a hÃ ng gÃ rÃ¡n sá» 1 Viá»t Nam</p>
+						<p>Cửa hàng gà rán số 1 Việt Nam</p>
 						<div class="footer_social">
 							<a href=""> <i class="fa fa-facebook" aria-hidden="true"></i>
 							</a> <a href=""> <i class="fa fa-twitter" aria-hidden="true"></i>
@@ -692,9 +333,9 @@
 					</div>
 				</div>
 				<div class="col-md-4 footer-col">
-					<h4>Thá»i gian hoáº¡t Äá»ng</h4>
-					<p>Má»i ngÃ y</p>
-					<p>10:00 sÃ¡ng -10:00 tá»i</p>
+					<h4>Thời gian hoạt động</h4>
+					<p>Mỗi ngày</p>
+					<p>10:00 sáng -10:00 tối</p>
 				</div>
 			</div>
 			<div class="footer-info">
@@ -707,14 +348,21 @@
 	</footer>
 
 	<!-- Js Plugins -->
-	<script src="js/jquery-3.3.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.nice-select.min.js"></script>
-	<script src="js/jquery-ui.min.js"></script>
-	<script src="js/jquery.slicknav.js"></script>
-	<script src="js/mixitup.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/main.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/view/web/js/jquery-3.3.1.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/view/web/js/bootstrap.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/view/web/js/jquery.nice-select.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/view/web/js/jquery-ui.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/view/web/js/jquery.slicknav.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/view/web/js/mixitup.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/view/web/js/owl.carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/view/web/js/main.js"></script>
 
 
 

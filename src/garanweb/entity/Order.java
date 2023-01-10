@@ -74,5 +74,8 @@ public class Order {
 		this.status = status;
 		this.user_id = user_id;
 	}
+	public Order() {
+		// TODO Auto-generated constructor stub
+	}
 
 }

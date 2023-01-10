@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LogoutController
  */
-@WebServlet("/LogoutController")
+@WebServlet("/logout")
 public class LogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -38,7 +38,7 @@ public class LogoutController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			request.getSession(false).invalidate();
+			request.getSession().removeAttribute("user_session");
 			response.sendRedirect(request.getContextPath() + "/trang-chu");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,10 +50,10 @@ public class LogoutController extends HttpServlet {
 	 *      response)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			req.getSession(false).invalidate();
-			resp.sendRedirect(req.getContextPath() + "/trang-chu");
+			request.getSession().removeAttribute("user_session");
+			resp.sendRedirect(request.getContextPath() + "/trang-chu");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
